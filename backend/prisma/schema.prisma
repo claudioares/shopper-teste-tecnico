@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Measurement {
+  id               String @id @default(uuid())
+  image            String
+  customer_code    String
+  measure_datetime String
+  measure_value    Int
+  measure_type     String
+
+  isConfirmed Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("measurement")
+}
