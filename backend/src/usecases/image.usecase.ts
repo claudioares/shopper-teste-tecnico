@@ -3,6 +3,7 @@ import { ImageRepositoryPrisma } from "../repository/methods.repository";
 import { IConfirmCreationData, IImageCreate, IImageInterface } from "../interfaces/image.interface";
 import { checkMonthlyRecord } from "../middlewares/checkReading";
 import { uploadImageToGemini } from "../middlewares/upload";
+import { base64ToTempImage } from "../middlewares/createLinkImage";
 
 
 export class ImageUsecase {
@@ -95,8 +96,10 @@ export class ImageUsecase {
             const responseUploadGemini = await uploadImageToGemini(image);
             const measureNumber = Number(responseUploadGemini.measure.split(' ')[0]);
 
+            const linkImage = await base64ToTempImage(data.image)
+
             const dataRepository = {
-                image: responseUploadGemini.linkImage,
+                image: linkImage,
                 customer_code,
                 measure_datetime,
                 measure_value:measureNumber,
@@ -150,7 +153,6 @@ export class ImageUsecase {
 
         const resultRepositoryPatch:IImageInterface = await this.repository.patch(data);
 
-        console.log(resultRepositoryPatch);
 
         if(resultRepositoryPatch.isConfirmed === true){
             return {
