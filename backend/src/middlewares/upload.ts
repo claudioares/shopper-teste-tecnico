@@ -37,10 +37,6 @@ export async function uploadImageToGemini (imageBase64:string) {
 
     const getResponse:GetResponseType = await fileManager.getFile(uploadResult.file.name);
 
-    const listFilesResponse = await fileManager.listFiles();
-
-    console.log(listFilesResponse)
-
     const prompt = `
         If the image is of a water or light meter, just send me the measurement numbers.
     `
