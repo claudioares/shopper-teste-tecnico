@@ -35,16 +35,10 @@ Adicione esta variável de ambiente:
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/mydatabase"
 ```
 
-3. **Instale as dependencias**
+3. **Instale Dependencias do Doccker**
 
 ```bash
-npm install
-```
-
-4. **Rode o servidor**
-
-```bash
-npm run dev
+docker compose up --build -d
 ```
 Teste a aplicação usando Insomnia, SoapUI, Thunder Client ou qualquer ferramenta para testes de APIs.
 
