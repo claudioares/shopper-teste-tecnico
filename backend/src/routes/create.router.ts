@@ -31,7 +31,7 @@ createRouter.post("/upload", async(req, res)=>{
         return res.status(200).json({messege: resultUseCase});
         
     } catch (error) {
-        res.json({messege: "Fail in the aplications"});
+        res.json({messege: "Fail in the aplications", error});
         return console.log("Fail in the aplications", error);
     }
 })
