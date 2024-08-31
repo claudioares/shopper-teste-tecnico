@@ -21,9 +21,9 @@ Este projeto é uma aplicação backend desenvolvida com Node.js, Express e Pris
 
 1. **Clone o Repositório**
 
-   ```bash
-   git@github.com:claudioares/shopper-teste-tecnico.git
-   ```
+```bash
+git@github.com:claudioares/shopper-teste-tecnico.git
+```
 2. **Crie um Arquivo .env**
 
 Na raiz do projeto, crie um arquivo .env com a variável de ambiente GEMINI_API_KEY:
