@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start:docker": "docker compose up --build -d",
-    "dev": "npm run start:docker && tsx watch --env-file .env src/server.ts",
+    "dev": "npm run start:docker && tsx watch --env-file .env src/server.ts && npx prisma migrate dev",
     "build": "tsup src",
     "start": "node dist/server.js"
   },
