@@ -30,11 +30,6 @@ Na raiz do projeto, crie um arquivo .env com a variável de ambiente GEMINI_API_
 ```bash
 GEMINI_API_KEY=<sua-chave-da-api>
 ```
-Adicione esta variável de ambiente:
-```bach
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/mydatabase"
-```
-
 3. **Instale Dependencias do Doccker**
 
 ```bash
