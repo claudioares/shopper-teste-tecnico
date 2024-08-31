@@ -4,6 +4,7 @@ services:
   app:
     build:
       context: .
+    command: ["sh", "-c", "npx prisma migrate dev && node dist/server.js"]
     ports:
       - "3333:3333"
     depends_on:
@@ -12,15 +13,16 @@ services:
       - .env
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=postgresql://postgres:password@backend-db-1:5432/mydatabase
+      - DATABASE_URL=postgresql://postgres:postgres@backend-db-1:5432/mydatabase
     volumes:
       - .:/app
+
   db:
     image: postgres:15
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydatabase
     ports:
       - "5432:5432"
     volumes:
