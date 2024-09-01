@@ -80,6 +80,94 @@ Response Body
 }
 ```
 
+**PATCH /confirm**
+Responsável por confirmar ou corrigir o valor lido pelo LLM.
+
+Request Body
+```bash
+{
+  "measure_uuid": "string",
+  "confirmed_value": integer
+}
+```
+Response Body
+***200 OK***
+```bash
+{
+ “success”: true
+}
+```
+
+***400 Bad Request***
+```bash
+{
+  "error_code": "INVALID_DATA",
+  "error_description": "<descrição do erro>"
+}
+```
+
+***404 Conflict***
+```bash
+{
+  "error_code": "MEASURE_NOT_FOUND",
+  "error_description": "Leitura do mês já realizada"
+}
+```
+
+***409 Conflict***
+```bash
+{
+  "error_code":"CONFIRMATION_DUPLICATE",
+  "error_description": "Leitura do mês já realizada"
+}
+```
+
+**GET /<customer code>/list**
+Responsável por listar as medidas realizadas por um determinado cliente.
+
+Ex. {base url}/<customer code>/list?measure_type=WATER
+
+Response Body
+***200 OK***
+```bash
+{
+   “customer_code”: string,
+  “measures”: [
+    {
+    “measure_uuid”: string,
+    “measure_datetime”: datetime,
+    “measure_type”: string,
+    “has_confirmed”:boolean,
+    “image_url”: string
+    },
+    {
+    “measure_uuid”: string,
+    “measure_datetime”: datetime,
+    “measure_type”: string,
+    “has_confirmed”:boolean,
+    “image_url”: string
+    }
+  ]
+}
+```
+
+***400 Bad Request***
+```bash
+{
+  "error_code": "INVALID_TYPE",
+  "error_description": “Tipo de medição não permitida”
+}
+```
+
+***404 Conflict***
+```bash
+{
+  "error_code": "MEASURES_NOT_FOUND",
+"error_description": "Nenhuma leitura encontrada"
+}
+```
+
+
 ## Testes
 Teste a API localmente utilizando ferramentas como Postman para garantir que tudo está funcionando conforme o esperado.
 
