@@ -35,6 +35,11 @@ GEMINI_API_KEY=<sua-chave-da-api>
 ```bash
 docker compose up --build -d
 ```
+3. **Rode o projeto em http://localhost:3333/**
+
+```bash
+http://localhost:3333/
+```
 Teste a aplicação usando Insomnia, SoapUI, Thunder Client ou qualquer ferramenta para testes de APIs.
 
 ## Endpoints
