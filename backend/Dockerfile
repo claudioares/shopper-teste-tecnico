@@ -19,8 +19,8 @@ RUN npx prisma generate
 # Compile o TypeScript para JavaScript
 RUN npx tsc
 
-# Compile o TypeScript para JavaScript
-RUN npm run build
+# # Compile o TypeScript para JavaScript
+# RUN npm run build
 
 # Exponha a porta que a aplicação vai rodar
 EXPOSE 3333
