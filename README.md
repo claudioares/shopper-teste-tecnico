@@ -168,6 +168,3 @@ Response Body
 ```
 
 
-## Testes
-Teste a API localmente utilizando ferramentas como Postman para garantir que tudo está funcionando conforme o esperado.
-
