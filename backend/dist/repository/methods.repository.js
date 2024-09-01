@@ -3,8 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImageRepositoryPrisma = void 0;
 const prisma_config_1 = require("../db/prisma.config");
 class ImageRepositoryPrisma {
-    async get() {
-        const resultPrisma = await prisma_config_1.prisma.measurement.findMany();
+    async get(params) {
+        const resultPrisma = await prisma_config_1.prisma.measurement.findMany({
+            where: params,
+        });
         return resultPrisma;
     }
     async create(data) {

@@ -11,8 +11,31 @@ class ImageUsecase {
         this.repository = new methods_repository_1.ImageRepositoryPrisma();
     }
     ;
-    async get() {
-        const resultRepository = await this.repository.get();
+    async get(code) {
+        const querySchema = zod_1.z.object({
+            measure_type: zod_1.z.enum(['WATER', 'GAS', 'water', 'gas']).optional(),
+        });
+        const queryValidation = querySchema.safeParse(code.query);
+        if (!queryValidation.success) {
+            return ({
+                error_code: "INVALID_TYPE",
+                error_description: "Tipo de medição não permitida"
+            });
+        }
+        ;
+        const measureType = queryValidation.data.measure_type?.toUpperCase();
+        const params = { customer_code: code.customerCode };
+        if (measureType) {
+            params.measure_type = measureType;
+        }
+        const resultRepository = await this.repository.get(params);
+        if (resultRepository.length === 0) {
+            return ({
+                error_code: "MEASURES_NOT_FOUND",
+                error_description: "Nenhuma leitura encontrada",
+            });
+        }
+        ;
         return resultRepository;
     }
     async create(data) {
