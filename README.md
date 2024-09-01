@@ -40,8 +40,6 @@ docker compose up --build -d
 ```bash
 http://localhost:3333/
 ```
-Teste a aplicação usando Insomnia, SoapUI, Thunder Client ou qualquer ferramenta para testes de APIs.
-
 ## Endpoints
 
 **POST /upload**
