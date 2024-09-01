@@ -163,7 +163,7 @@ Response Body
 ```bash
 {
   "error_code": "MEASURES_NOT_FOUND",
-"error_description": "Nenhuma leitura encontrada"
+  "error_description": "Nenhuma leitura encontrada"
 }
 ```
 
