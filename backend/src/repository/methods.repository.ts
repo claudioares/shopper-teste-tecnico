@@ -1,10 +1,12 @@
 import { prisma } from "../db/prisma.config";
-import { IConfirmCreationData, IImageCreate, IImageInterface, IMethodsRepositoryImage } from "../interfaces/image.interface";
+import { IConfirmCreationData, IGetUser, IImageCreate, IImageInterface, IMethodsRepositoryImage } from "../interfaces/image.interface";
 
 export class ImageRepositoryPrisma implements IMethodsRepositoryImage {
   
-    async get(): Promise<IImageInterface[]> {
-        const resultPrisma = await prisma.measurement.findMany();
+    async get(params:any): Promise<IImageInterface[]> {
+    const resultPrisma = await prisma.measurement.findMany({
+      where: params,
+    });
 
         return resultPrisma;
     }

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { ImageRepositoryPrisma } from "../repository/methods.repository";
-import { IConfirmCreationData, IImageCreate, IImageInterface } from "../interfaces/image.interface";
+import { IConfirmCreationData, IError, IGetUser, IImageCreate, IImageInterface } from "../interfaces/image.interface";
 import { checkMonthlyRecord } from "../middlewares/checkReading";
 import { uploadImageToGemini } from "../middlewares/upload";
 import { base64ToTempImage } from "../middlewares/createLinkImage";
@@ -14,8 +14,38 @@ export class ImageUsecase {
         this.repository = new ImageRepositoryPrisma()
     };
 
-    async get():Promise<IImageInterface[]>{
-        const resultRepository = await this.repository.get();
+    async get(code:IGetUser):Promise<{}>{
+
+        const querySchema = z.object({
+            measure_type: z.enum(['WATER', 'GAS', 'water', 'gas']).optional(),
+        });
+
+        const queryValidation = querySchema.safeParse(code.query);
+
+        if (!queryValidation.success) {
+            return({ 
+                error_code:"INVALID_TYPE",
+                error_description:"Tipo de medição não permitida"
+            });
+        };
+
+        const measureType = queryValidation.data.measure_type?.toUpperCase();
+
+        const params: any = { customer_code: code.customerCode };
+
+        if (measureType) {
+            params.measure_type = measureType;
+        }
+
+        const resultRepository = await this.repository.get(params);
+
+        if (resultRepository.length === 0) {
+            return({
+                error_code: "MEASURES_NOT_FOUND",
+                error_description: "Nenhuma leitura encontrada",
+            });
+        };
+
         return resultRepository;
     }
 

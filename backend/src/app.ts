@@ -30,6 +30,5 @@ export class App {
         this.app.use(confirmationRouter);
         this.app.use(getRouter);
         this.app.use(deletIdRouter);
-
     }
 }

@@ -28,9 +28,14 @@ export interface IError {
     error_description: string
 }
 
+export interface IGetUser {
+    customerCode: string,
+    query: any
+}
+
 export interface IMethodsRepositoryImage {
     create(data:IImageCreate): Promise<IImageInterface>;
     patch(data:IConfirmCreationData): Promise<IImageInterface>
-    get():Promise<IImageInterface[]>
+    get(code:IGetUser):Promise<IImageInterface[]>
     deleteId(id:string):Promise<IImageInterface>
 }
